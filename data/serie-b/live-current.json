@@ -2,9 +2,9 @@
   "competition": "Serie B",
   "espnId": "ita.2",
   "date": "2026-10-31",
-  "updatedAt": "2026-10-31T20:24:43.400591+00:00",
+  "updatedAt": "2026-10-31T20:27:43.310812+00:00",
   "total": 5,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401899560",
@@ -81,14 +81,14 @@
       "awayTeam": "Virtus Entella",
       "homeScore": 2,
       "awayScore": 0,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+1'",
-      "state": "in",
-      "elapsed": "90'+1'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+3'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Stadio Luigi Ferraris"
     }
   ]
