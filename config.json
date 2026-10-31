@@ -1,0 +1,16 @@
+{
+  "competitions": {
+    "serie-a": {
+      "enabled": true,
+      "espn_id": "ita.1"
+    },
+    "serie-b": {
+      "enabled": true,
+      "espn_id": "ita.2"
+    },
+    "champions-league": {
+      "enabled": true,
+      "espn_id": "uefa.champions"
+    }
+  }
+}
