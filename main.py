@@ -96,18 +96,14 @@ def process(slug, comp, settings, mode):
     today = datetime.now(zone).date()
     yesterday = today - timedelta(days=1)
     date_strings = [yesterday.strftime("%Y%m%d"), today.strftime("%Y%m%d")]
-    old = existing_matches(folder)
-    allowed = {today, yesterday}
-    old_recent = [m for m in old.values() if local_day(m, zone) in allowed]
 
     if mode == "schedule":
         fetched = fetch_scoreboard(comp["espn_id"], date_strings, settings.get("request_timeout_seconds", 20))
-        fresh = merge(fetched, old, allowed, zone)
-        publish(folder, comp["name"], comp["espn_id"], fresh, zone)
-        # Snapshot used by the live trigger; avoids hitting ESPN while idle.
         save_if_changed(folder / "schedule.json", doc(comp["name"], comp["espn_id"], today, fetched))
         return
 
+    old = existing_matches(folder)
+    allowed = {today, yesterday}
     snapshot = read_json(folder / "schedule.json")
     if snapshot is None:
         raise RuntimeError(f"Missing data/{slug}/schedule.json: run schedule workflow first")
