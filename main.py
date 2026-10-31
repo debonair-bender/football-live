@@ -1,4 +1,4 @@
-"""Schedule discovery every 6 hours; live polling only near scheduled kickoffs."""
+"""Publish separate today/yesterday ESPN football snapshots, local to Europe/Rome."""
 import argparse
 import json
 import sys
@@ -6,133 +6,143 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from scrapers.espn import dates_for_window, fetch_scoreboard
+from scrapers.espn import fetch_scoreboard
 
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
 CONFIG = ROOT / "config.json"
+LIVE_FILES = ("live-current.json", "live-yesterday.json")
 
 
 def read_json(path):
-    if not path.exists():
-        return None
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
 
 
-def write_if_changed(path, content):
+def save_if_changed(path, payload):
     old = read_json(path)
-    if old and all(old.get(key) == value for key, value in content.items() if key != "updatedAt"):
-        print(f"No changes: {path.relative_to(ROOT)}", flush=True)
+    if old and {k: v for k, v in old.items() if k != "updatedAt"} == {
+        k: v for k, v in payload.items() if k != "updatedAt"
+    }:
+        print(f"Unchanged: {path.relative_to(ROOT)}", flush=True)
         return False
     path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(content, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    tmp.replace(path)
-    print(f"Updated: {path.relative_to(ROOT)}", flush=True)
+    temp = path.with_suffix(".json.tmp")
+    temp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temp.replace(path)
+    print(f"Written: {path.relative_to(ROOT)}", flush=True)
     return True
 
 
-def document(competition, espn_id, matches):
+def local_day(match, zone):
+    return datetime.fromisoformat(match["date"].replace("Z", "+00:00")).astimezone(zone).date()
+
+
+def doc(name, espn_id, date_value, matches):
     return {
-        "competition": competition,
+        "competition": name,
         "espnId": espn_id,
+        "date": date_value.isoformat(),
         "updatedAt": datetime.now(timezone.utc).isoformat(),
         "total": len(matches),
         "liveCount": sum(bool(m.get("isLive")) for m in matches),
-        "matches": matches,
+        "matches": sorted(matches, key=lambda m: (m["date"], m["id"])),
     }
 
 
-def parse_utc(value):
-    return datetime.fromisoformat(value.replace("Z", "+00:00")).astimezone(timezone.utc)
+def existing_matches(folder):
+    """Read both files: yesterday's matches may still be in yesterday's current file."""
+    matches = {}
+    for filename in LIVE_FILES:
+        for match in (read_json(folder / filename) or {}).get("matches", []):
+            matches[match["id"]] = match
+    return matches
 
 
-def active_matches(schedule, now, minutes_before, hours_after):
-    result = []
-    for match in schedule:
-        if match.get("status") in ("POSTPONED", "CANCELLED"):
+def merge(new_matches, old_matches, allowed_dates, zone):
+    """Prefer fresh ESPN; preserve previous scores if a schedule response is less detailed."""
+    merged = {mid: m for mid, m in old_matches.items() if local_day(m, zone) in allowed_dates}
+    for match in new_matches:
+        if local_day(match, zone) not in allowed_dates:
             continue
-        kickoff = parse_utc(match["date"])
-        if kickoff - timedelta(minutes=minutes_before) <= now <= kickoff + timedelta(hours=hours_after):
-            result.append(match)
-    return result
+        previous = merged.get(match["id"])
+        if previous and (previous.get("isFinished") or previous.get("isLive")) and match.get("status") == "SCHEDULED":
+            continue
+        merged[match["id"]] = match
+    return list(merged.values())
 
 
-def update_schedule(slug, config, settings):
-    dates = dates_for_window(
-        settings.get("timezone", "Europe/Rome"),
-        settings.get("schedule_days_before", 1),
-        settings.get("schedule_days_after", 7),
-    )
-    matches = fetch_scoreboard(config["espn_id"], dates, settings.get("request_timeout_seconds", 20))
-    # ESPN may legitimately return [] for a league with no fixtures in this window.
-    changed = write_if_changed(DATA / slug / "schedule.json", document(config["name"], config["espn_id"], matches))
-    # Expose an initial empty live endpoint even before the first match begins.
-    live_file = DATA / slug / "live.json"
-    if not live_file.exists():
-        write_if_changed(live_file, document(config["name"], config["espn_id"], []))
-    return changed
+def publish(folder, name, espn_id, matches, zone):
+    today = datetime.now(zone).date()
+    yesterday = today - timedelta(days=1)
+    for filename, day in (("live-current.json", today), ("live-yesterday.json", yesterday)):
+        selected = [m for m in matches if local_day(m, zone) == day]
+        save_if_changed(folder / filename, doc(name, espn_id, day, selected))
 
 
-def update_live(slug, config, settings):
-    schedule_data = read_json(DATA / slug / "schedule.json")
-    if schedule_data is None:
-        raise RuntimeError(f"Missing data/{slug}/schedule.json. Run 'python main.py schedule' first.")
-    now = datetime.now(timezone.utc)
-    active = active_matches(
-        schedule_data.get("matches", []), now,
-        settings.get("live_minutes_before", 30),
-        settings.get("live_hours_after", 4),
-    )
-    if not active:
-        print(f"{slug}: no matches in polling window; skip ESPN", flush=True)
-        return False
+def should_poll(matches, now, before_minutes, after_hours):
+    """Monitor around kickoff; future improvements can incorporate terminal status."""
+    for match in matches:
+        if match.get("status") in ("POSTPONED", "CANCELLED", "FINISHED") or match.get("isFinished"):
+            continue
+        kickoff = datetime.fromisoformat(match["date"].replace("Z", "+00:00")).astimezone(timezone.utc)
+        if kickoff - timedelta(minutes=before_minutes) <= now <= kickoff + timedelta(hours=after_hours):
+            return True
+    return False
 
+
+def process(slug, comp, settings, mode):
+    folder = DATA / slug
     zone = ZoneInfo(settings.get("timezone", "Europe/Rome"))
-    # Include adjacent local dates if games cross midnight; ESPN dates are calendar filters.
-    dates = set()
-    for m in active:
-        local = parse_utc(m["date"]).astimezone(zone).date()
-        for delta in (-1, 0, 1):
-            dates.add((local + timedelta(days=delta)).strftime("%Y%m%d"))
-    fetched = fetch_scoreboard(config["espn_id"], dates, settings.get("request_timeout_seconds", 20))
-    if not fetched:
-        raise RuntimeError(f"{slug}: ESPN returned no events during an active polling window; preserving previous live JSON")
+    today = datetime.now(zone).date()
+    yesterday = today - timedelta(days=1)
+    date_strings = [yesterday.strftime("%Y%m%d"), today.strftime("%Y%m%d")]
+    old = existing_matches(folder)
+    allowed = {today, yesterday}
+    old_recent = [m for m in old.values() if local_day(m, zone) in allowed]
 
-    # Preserve earlier matches in the current schedule window; replace with latest ESPN values.
-    prev = read_json(DATA / slug / "live.json") or {}
-    scheduled_ids = {m["id"] for m in schedule_data.get("matches", [])}
-    merged = {m["id"]: m for m in prev.get("matches", []) if m["id"] in scheduled_ids}
-    merged.update({m["id"]: m for m in fetched if m["id"] in scheduled_ids})
-    for match in active:
-        if match["id"] not in merged:
-            raise RuntimeError(f"{slug}: active match {match['id']} missing from ESPN response")
-    matches = sorted(merged.values(), key=lambda m: (m["date"], m["id"]))
-    return write_if_changed(DATA / slug / "live.json", document(config["name"], config["espn_id"], matches))
+    if mode == "schedule":
+        fetched = fetch_scoreboard(comp["espn_id"], date_strings, settings.get("request_timeout_seconds", 20))
+        fresh = merge(fetched, old, allowed, zone)
+        publish(folder, comp["name"], comp["espn_id"], fresh, zone)
+        # Snapshot used by the live trigger; avoids hitting ESPN while idle.
+        save_if_changed(folder / "schedule.json", doc(comp["name"], comp["espn_id"], today, fetched))
+        return
+
+    snapshot = read_json(folder / "schedule.json")
+    if snapshot is None:
+        raise RuntimeError(f"Missing data/{slug}/schedule.json: run schedule workflow first")
+    scheduled = [m for m in snapshot.get("matches", []) if local_day(m, zone) in allowed]
+    candidates = merge(scheduled, old, allowed, zone)
+    # Refresh filenames at midnight even if no live game needs an ESPN request.
+    if should_poll(candidates, datetime.now(timezone.utc),
+                   settings.get("live_minutes_before", 30),
+                   settings.get("live_hours_after", 4)):
+        fetched = fetch_scoreboard(comp["espn_id"], date_strings, settings.get("request_timeout_seconds", 20))
+        if not fetched:
+            raise RuntimeError(f"{slug}: no ESPN events during an active monitoring window")
+        candidates = merge(fetched, {m["id"]: m for m in candidates}, allowed, zone)
+    else:
+        print(f"{slug}: outside live window; no ESPN request", flush=True)
+    publish(folder, comp["name"], comp["espn_id"], candidates, zone)
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("mode", choices=["schedule", "live"])
+    parser.add_argument("mode", choices=("schedule", "live"))
     args = parser.parse_args()
     config = read_json(CONFIG)
-    settings = config.get("settings", {})
     errors = []
     for slug, comp in config["competitions"].items():
         if not comp.get("enabled", False):
-            print(f"Skip disabled: {slug}")
             continue
         try:
-            print(f"Processing {slug}: {args.mode}", flush=True)
-            if args.mode == "schedule":
-                update_schedule(slug, comp, settings)
-            else:
-                update_live(slug, comp, settings)
+            print(f"{slug}: {args.mode}", flush=True)
+            process(slug, comp, config.get("settings", {}), args.mode)
         except Exception as exc:
-            print(f"ERROR {slug}: {exc}", file=sys.stderr, flush=True)
             errors.append(slug)
+            print(f"ERROR {slug}: {exc}", file=sys.stderr, flush=True)
     if errors:
-        raise SystemExit(f"Failed: {', '.join(errors)}")
+        raise SystemExit(f"Failed competitions: {', '.join(errors)}")
 
 
 if __name__ == "__main__":
