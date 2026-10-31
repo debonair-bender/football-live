@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-10-31",
-  "updatedAt": "2026-10-31T15:54:42.558998+00:00",
+  "updatedAt": "2026-10-31T15:57:41.716276+00:00",
   "total": 3,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874798",
@@ -13,14 +13,14 @@
       "awayTeam": "Monza",
       "homeScore": 2,
       "awayScore": 1,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+5'",
-      "state": "in",
-      "elapsed": "90'+5'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+6'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Renato Dall'Ara"
     },
     {
