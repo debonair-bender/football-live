@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-10-31",
-  "updatedAt": "2026-10-31T18:51:41.338285+00:00",
+  "updatedAt": "2026-10-31T18:54:42.109045+00:00",
   "total": 3,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874798",
@@ -30,14 +30,14 @@
       "awayTeam": "AS Roma",
       "homeScore": 2,
       "awayScore": 5,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+4'",
-      "state": "in",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
       "elapsed": "90'+4'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Stadio Friuli"
     },
     {
