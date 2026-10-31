@@ -1,173 +1,96 @@
+"""ESPN scoreboard JSON adapter (unofficial endpoint; subject to change)."""
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 import requests
 
-BASE_URL = (
-    "https://site.api.espn.com/apis/site/v2/"
-    "sports/soccer"
-)
+BASE = "https://site.api.espn.com/apis/site/v2/sports/soccer"
 
 
-def get_match_status(status):
-    status_type = status.get("type", {})
-    state = status_type.get("state")
-    name = status_type.get("name", "")
-    detail = status_type.get("detail", "")
-
-    if name == "STATUS_HALFTIME":
-        return "HALF_TIME"
-
-    if name == "STATUS_POSTPONED":
-        return "POSTPONED"
-
-    if name == "STATUS_CANCELED":
-        return "CANCELLED"
-
-    if name == "STATUS_SUSPENDED":
-        return "SUSPENDED"
-
+def game_status(status):
+    info = status.get("type") or {}
+    name = info.get("name", "")
+    state = info.get("state", "")
+    special = {
+        "STATUS_HALFTIME": "HALF_TIME",
+        "STATUS_POSTPONED": "POSTPONED",
+        "STATUS_CANCELED": "CANCELLED",
+        "STATUS_CANCELLED": "CANCELLED",
+        "STATUS_SUSPENDED": "SUSPENDED",
+        "STATUS_FULL_TIME": "FINISHED",
+        "STATUS_FINAL": "FINISHED",
+    }
+    if name in special:
+        return special[name]
     if state == "pre":
         return "SCHEDULED"
-
     if state == "post":
         return "FINISHED"
-
     if state == "in":
-        period = status.get("period")
-
-        if period == 1:
-            return "FIRST_HALF"
-        if period == 2:
-            return "SECOND_HALF"
-        if period in (3, 4):
-            return "EXTRA_TIME"
-        if period == 5:
-            return "PENALTIES"
-
-        return "LIVE"
-
-    return name or detail or "UNKNOWN"
+        return {1: "FIRST_HALF", 2: "SECOND_HALF", 3: "EXTRA_TIME", 4: "EXTRA_TIME", 5: "PENALTIES"}.get(status.get("period"), "LIVE")
+    return name or "UNKNOWN"
 
 
-def parse_score(value):
-    if value is None or value == "":
-        return None
-
+def score(value):
+    if isinstance(value, dict):
+        value = value.get("value", value.get("displayValue"))
     try:
-        return int(value)
-    except (ValueError, TypeError):
+        return int(value) if value not in (None, "") else None
+    except (TypeError, ValueError):
         return None
 
 
 def parse_event(event):
     competitions = event.get("competitions") or []
-
     if not competitions:
         return None
-
-    competition = competitions[0]
-    competitors = competition.get("competitors", [])
-
-    home = next(
-        (t for t in competitors if t.get("homeAway") == "home"),
-        None
-    )
-    away = next(
-        (t for t in competitors if t.get("homeAway") == "away"),
-        None
-    )
-
-    if not home or not away:
+    game = competitions[0]
+    competitors = game.get("competitors") or []
+    home = next((x for x in competitors if x.get("homeAway") == "home"), None)
+    away = next((x for x in competitors if x.get("homeAway") == "away"), None)
+    if not home or not away or not event.get("id") or not event.get("date"):
         return None
-
-    status = event.get("status", {})
-    status_type = status.get("type", {})
-
-    match_status = get_match_status(status)
-
-    home_team = home.get("team", {})
-    away_team = away.get("team", {})
-
+    raw_status = event.get("status") or game.get("status") or {}
+    info = raw_status.get("type") or {}
+    state = info.get("state")
+    venue = game.get("venue") or {}
     return {
-        "id": str(event.get("id")),
-        "date": event.get("date"),
-        "homeTeam": home_team.get("displayName"),
-        "awayTeam": away_team.get("displayName"),
-        "homeTeamId": home_team.get("id"),
-        "awayTeamId": away_team.get("id"),
-        "homeScore": parse_score(home.get("score")),
-        "awayScore": parse_score(away.get("score")),
-        "status": match_status,
-        "espnStatus": status_type.get("name"),
-        "statusDetail": status_type.get("detail"),
-        "state": status_type.get("state"),
-        "elapsed": status.get("displayClock"),
-        "period": status.get("period"),
-        "isLive": status_type.get("state") == "in",
-        "isFinished": status_type.get("state") == "post",
-        "venue": (
-            competition.get("venue", {}).get("fullName")
-            if isinstance(competition.get("venue"), dict)
-            else None
-        )
+        "id": str(event["id"]),
+        "date": event["date"],
+        "homeTeam": (home.get("team") or {}).get("displayName"),
+        "awayTeam": (away.get("team") or {}).get("displayName"),
+        "homeScore": score(home.get("score")),
+        "awayScore": score(away.get("score")),
+        "status": game_status(raw_status),
+        "espnStatus": info.get("name"),
+        "statusDetail": info.get("detail"),
+        "state": state,
+        "elapsed": raw_status.get("displayClock"),
+        "period": raw_status.get("period"),
+        "isLive": state == "in",
+        "isFinished": state == "post",
+        "venue": venue.get("fullName") if isinstance(venue, dict) else None,
     }
 
 
-def fetch_matches(
-    espn_id,
-    timezone="Europe/Rome",
-    days_offset=None,
-    timeout=20
-):
-    if days_offset is None:
-        days_offset = [-1, 0, 1]
+def dates_for_window(timezone_name, before, after):
+    today = datetime.now(ZoneInfo(timezone_name)).date()
+    return [(today + timedelta(days=delta)).strftime("%Y%m%d") for delta in range(-before, after + 1)]
 
-    now = datetime.now(ZoneInfo(timezone))
+
+def fetch_scoreboard(espn_id, dates, timeout=20):
     matches = {}
-
-    session = requests.Session()
-    session.headers.update({
-        "Accept": "application/json",
-        "User-Agent": "FootballLiveSync/1.0"
-    })
-
-    for offset in days_offset:
-        date = (
-            now + timedelta(days=offset)
-        ).strftime("%Y%m%d")
-
-        url = f"{BASE_URL}/{espn_id}/scoreboard"
-
-        response = session.get(
-            url,
-            params={"dates": date, "limit": 200},
-            timeout=timeout
-        )
-
-        response.raise_for_status()
-        payload = response.json()
-
-        if not isinstance(payload.get("events"), list):
-            raise ValueError(
-                f"{espn_id}: invalid ESPN response for {date}"
-            )
-
-        events = payload["events"]
-
-        print(
-            f"{espn_id} | {date} | "
-            f"{len(events)} events",
-            flush=True
-        )
-
-        for event in events:
-            match = parse_event(event)
-
-            if match is not None:
-                matches[match["id"]] = match
-
-    return sorted(
-        matches.values(),
-        key=lambda m: (m["date"] or "", m["id"])
-    )
+    with requests.Session() as session:
+        session.headers.update({"Accept": "application/json", "User-Agent": "FootballLiveSync/1.0"})
+        for day in sorted(set(dates)):
+            response = session.get(f"{BASE}/{espn_id}/scoreboard", params={"dates": day, "limit": 200}, timeout=timeout)
+            response.raise_for_status()
+            payload = response.json()
+            if not isinstance(payload, dict) or not isinstance(payload.get("events"), list):
+                raise ValueError(f"{espn_id} / {day}: unexpected ESPN response")
+            for event in payload["events"]:
+                parsed = parse_event(event)
+                if parsed:
+                    matches[parsed["id"]] = parsed
+            print(f"{espn_id} / {day}: {len(payload['events'])} events", flush=True)
+    return sorted(matches.values(), key=lambda x: (x["date"], x["id"]))
