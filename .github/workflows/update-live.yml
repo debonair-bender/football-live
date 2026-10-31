@@ -2,8 +2,6 @@ name: Update Football Live Scores
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "19 15 * * *"
 
 permissions:
   contents: write
