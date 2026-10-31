@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-10-31",
-  "updatedAt": "2026-10-31T21:42:41.953730+00:00",
+  "updatedAt": "2026-10-31T21:45:42.352768+00:00",
   "total": 3,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874798",
@@ -47,14 +47,14 @@
       "awayTeam": "Internazionale",
       "homeScore": 3,
       "awayScore": 1,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+4'",
-      "state": "in",
-      "elapsed": "90'+4'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+5'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "San Siro"
     }
   ]
