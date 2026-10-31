@@ -1,16 +1,26 @@
 {
   "competitions": {
     "serie-a": {
+      "name": "Serie A",
       "enabled": true,
       "espn_id": "ita.1"
     },
     "serie-b": {
+      "name": "Serie B",
       "enabled": true,
       "espn_id": "ita.2"
     },
     "champions-league": {
+      "name": "UEFA Champions League",
       "enabled": true,
       "espn_id": "uefa.champions"
     }
+  },
+  "settings": {
+    "timezone": "Europe/Rome",
+    "schedule_days_before": 1,
+    "live_minutes_before": 30,
+    "live_hours_after": 4,
+    "request_timeout_seconds": 20
   }
 }
