@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-01",
-  "updatedAt": "2026-11-01T18:54:43.276485+00:00",
+  "updatedAt": "2026-11-01T18:57:47.096140+00:00",
   "total": 5,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401875002",
@@ -64,14 +64,14 @@
       "awayTeam": "Genoa",
       "homeScore": 1,
       "awayScore": 2,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+2'",
-      "state": "in",
-      "elapsed": "90'+2'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+4'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Via Del Mare"
     },
     {
