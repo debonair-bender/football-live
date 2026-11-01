@@ -2,9 +2,9 @@
   "competition": "Serie B",
   "espnId": "ita.2",
   "date": "2026-10-31",
-  "updatedAt": "2026-10-31T23:00:42.218192+00:00",
+  "updatedAt": "2026-11-01T00:30:43.508346+00:00",
   "total": 5,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401899560",
@@ -79,16 +79,16 @@
       "date": "2026-10-31T18:30Z",
       "homeTeam": "Sampdoria",
       "awayTeam": "Virtus Entella",
-      "homeScore": 0,
+      "homeScore": 2,
       "awayScore": 0,
-      "status": "FIRST_HALF",
-      "espnStatus": "STATUS_FIRST_HALF",
-      "statusDetail": "6'",
-      "state": "in",
-      "elapsed": "6'",
-      "period": 1,
-      "isLive": true,
-      "isFinished": false,
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+3'",
+      "period": 2,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Stadio Luigi Ferraris"
     }
   ]
