@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-01",
-  "updatedAt": "2026-11-01T15:57:42.937619+00:00",
+  "updatedAt": "2026-11-01T16:00:43.516815+00:00",
   "total": 5,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401875002",
@@ -47,14 +47,14 @@
       "awayTeam": "Cagliari",
       "homeScore": 2,
       "awayScore": 1,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+8'",
-      "state": "in",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
       "elapsed": "90'+8'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Olimpico"
     },
     {
