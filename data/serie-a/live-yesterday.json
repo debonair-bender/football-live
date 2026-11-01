@@ -70,8 +70,8 @@
       "state": "in",
       "elapsed": "62'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Via Del Mare"
     },
     {
