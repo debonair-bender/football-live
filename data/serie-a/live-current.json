@@ -1,44 +1,9 @@
 {
   "competition": "Serie A",
   "espnId": "ita.1",
-  "date": "2026-11-02",
-  "updatedAt": "2026-11-02T21:42:43.203720+00:00",
-  "total": 2,
-  "liveCount": 1,
-  "matches": [
-    {
-      "id": "401874963",
-      "date": "2026-11-02T17:30Z",
-      "homeTeam": "Sassuolo",
-      "awayTeam": "Fiorentina",
-      "homeScore": 1,
-      "awayScore": 2,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "52'",
-      "state": "in",
-      "elapsed": "52'",
-      "period": 2,
-      "isLive": true,
-      "isFinished": false,
-      "venue": "Mapei Stadium"
-    },
-    {
-      "id": "401874971",
-      "date": "2026-11-02T19:45Z",
-      "homeTeam": "Atalanta",
-      "awayTeam": "Parma",
-      "homeScore": 0,
-      "awayScore": 3,
-      "status": "FINISHED",
-      "espnStatus": "STATUS_FULL_TIME",
-      "statusDetail": "FT",
-      "state": "post",
-      "elapsed": "90'+4'",
-      "period": 2,
-      "isLive": false,
-      "isFinished": true,
-      "venue": "New Balance Arena"
-    }
-  ]
+  "date": "2026-11-03",
+  "updatedAt": "2026-11-02T23:00:44.895201+00:00",
+  "total": 0,
+  "liveCount": 0,
+  "matches": []
 }
