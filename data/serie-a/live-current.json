@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-02",
-  "updatedAt": "2026-11-02T19:27:44.523408+00:00",
+  "updatedAt": "2026-11-02T19:48:55.502787+00:00",
   "total": 2,
-  "liveCount": 0,
+  "liveCount": 1,
   "matches": [
     {
       "id": "401874963",
@@ -30,13 +30,13 @@
       "awayTeam": "Parma",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "SCHEDULED",
-      "espnStatus": "STATUS_SCHEDULED",
-      "statusDetail": "Mon, November 2nd at 2:45 PM EST",
-      "state": "pre",
-      "elapsed": "0'",
-      "period": null,
-      "isLive": false,
+      "status": "FIRST_HALF",
+      "espnStatus": "STATUS_FIRST_HALF",
+      "statusDetail": "3'",
+      "state": "in",
+      "elapsed": "3'",
+      "period": 1,
+      "isLive": true,
       "isFinished": false,
       "venue": "New Balance Arena"
     }
