@@ -2,9 +2,9 @@
   "competition": "UEFA Champions League",
   "espnId": "uefa.champions",
   "date": "2026-11-03",
-  "updatedAt": "2026-11-03T19:39:44.656082+00:00",
+  "updatedAt": "2026-11-03T19:42:57.756429+00:00",
   "total": 9,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401915310",
@@ -30,14 +30,14 @@
       "awayTeam": "VfB Stuttgart",
       "homeScore": 2,
       "awayScore": 0,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_IN_PROGRESS",
-      "statusDetail": "90'+4'",
-      "state": "in",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
       "elapsed": "90'+4'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "RAMS Park"
     },
     {
