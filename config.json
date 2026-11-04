@@ -20,7 +20,6 @@
     "timezone": "Europe/Rome",
     "schedule_days_before": 1,
     "live_minutes_before": 30,
-    "live_hours_after": 4,
     "request_timeout_seconds": 20
   }
 }
