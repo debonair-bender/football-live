@@ -65,6 +65,8 @@ def merge(new_matches, old_matches, allowed_dates, zone):
         if local_day(match, zone) not in allowed_dates:
             continue
         previous = merged.get(match["id"])
+        if previous and (previous.get("isFinished") or previous.get("status") == "FINISHED") and not (match.get("isFinished") or match.get("status") == "FINISHED"):
+            continue
         if previous and (previous.get("isFinished") or previous.get("isLive")) and match.get("status") == "SCHEDULED":
             continue
         merged[match["id"]] = match
@@ -79,13 +81,17 @@ def publish(folder, name, espn_id, matches, zone):
         save_if_changed(folder / filename, doc(name, espn_id, day, selected))
 
 
-def should_poll(matches, now, before_minutes, after_hours):
-    """Monitor around kickoff; future improvements can incorporate terminal status."""
+def should_poll(matches, now, before_minutes):
+    """Poll recent candidates until terminal, including recovery after outages.
+
+    process() limits candidates to today's and yesterday's Rome kickoff dates.
+    A fixed cutoff after kickoff can strand a stale live/scheduled row forever.
+    """
     for match in matches:
         if match.get("status") in ("POSTPONED", "CANCELLED", "FINISHED") or match.get("isFinished"):
             continue
         kickoff = datetime.fromisoformat(match["date"].replace("Z", "+00:00")).astimezone(timezone.utc)
-        if kickoff - timedelta(minutes=before_minutes) <= now <= kickoff + timedelta(hours=after_hours):
+        if kickoff - timedelta(minutes=before_minutes) <= now:
             return True
     return False
 
@@ -96,27 +102,30 @@ def process(slug, comp, settings, mode):
     today = datetime.now(zone).date()
     yesterday = today - timedelta(days=1)
     date_strings = [yesterday.strftime("%Y%m%d"), today.strftime("%Y%m%d")]
+    old = existing_matches(folder)
+    allowed = {today, yesterday}
 
     if mode == "schedule":
         fetched = fetch_scoreboard(comp["espn_id"], date_strings, settings.get("request_timeout_seconds", 20))
         save_if_changed(folder / "schedule.json", doc(comp["name"], comp["espn_id"], today, fetched))
+        publish(folder, comp["name"], comp["espn_id"], merge(fetched, old, allowed, zone), zone)
         return
 
-    old = existing_matches(folder)
-    allowed = {today, yesterday}
     snapshot = read_json(folder / "schedule.json")
-    if snapshot is None:
-        raise RuntimeError(f"Missing data/{slug}/schedule.json: run schedule workflow first")
-    scheduled = [m for m in snapshot.get("matches", []) if local_day(m, zone) in allowed]
-    candidates = merge(scheduled, old, allowed, zone)
+    scheduled = [m for m in (snapshot or {}).get("matches", []) if local_day(m, zone) in allowed]
+    # Discovery only fills missing IDs. Stored live rows are newer than schedule.
+    seeds = {m["id"]: m for m in scheduled}
+    seeds.update(old)
+    candidates = merge([], seeds, allowed, zone)
     # Refresh filenames at midnight even if no live game needs an ESPN request.
-    if should_poll(candidates, datetime.now(timezone.utc),
-                   settings.get("live_minutes_before", 30),
-                   settings.get("live_hours_after", 4)):
+    if snapshot is None or should_poll(candidates, datetime.now(timezone.utc),
+                                      settings.get("live_minutes_before", 30)):
         fetched = fetch_scoreboard(comp["espn_id"], date_strings, settings.get("request_timeout_seconds", 20))
-        if not fetched:
+        if not fetched and candidates:
             raise RuntimeError(f"{slug}: no ESPN events during an active monitoring window")
         candidates = merge(fetched, {m["id"]: m for m in candidates}, allowed, zone)
+        if snapshot is None:
+            save_if_changed(folder / "schedule.json", doc(comp["name"], comp["espn_id"], today, fetched))
     else:
         print(f"{slug}: outside live window; no ESPN request", flush=True)
     publish(folder, comp["name"], comp["espn_id"], candidates, zone)
