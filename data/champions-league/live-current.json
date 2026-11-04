@@ -2,9 +2,9 @@
   "competition": "UEFA Champions League",
   "espnId": "uefa.champions",
   "date": "2026-11-04",
-  "updatedAt": "2026-11-04T19:39:43.344478+00:00",
+  "updatedAt": "2026-11-04T19:42:43.778941+00:00",
   "total": 9,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401915382",
@@ -30,14 +30,14 @@
       "awayTeam": "Real Madrid",
       "homeScore": 2,
       "awayScore": 3,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+4'",
-      "state": "in",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
       "elapsed": "90'+4'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "OPAP Arena"
     },
     {
