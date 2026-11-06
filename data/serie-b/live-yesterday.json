@@ -1,9 +1,27 @@
 {
   "competition": "Serie B",
   "espnId": "ita.2",
-  "date": "2026-11-05",
-  "updatedAt": "2026-11-05T23:00:43.163260+00:00",
-  "total": 0,
+  "date": "2026-11-06",
+  "updatedAt": "2026-11-06T23:00:42.849498+00:00",
+  "total": 1,
   "liveCount": 0,
-  "matches": []
+  "matches": [
+    {
+      "id": "401899559",
+      "date": "2026-11-06T19:30Z",
+      "homeTeam": "Ascoli",
+      "awayTeam": "Palermo",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+4'",
+      "period": 2,
+      "isLive": false,
+      "isFinished": true,
+      "venue": "Stadio Cino e Lillo Del Duca"
+    }
+  ]
 }
