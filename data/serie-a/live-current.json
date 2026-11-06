@@ -2,8 +2,26 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-06",
-  "updatedAt": "2026-11-05T23:00:43.161976+00:00",
-  "total": 0,
+  "updatedAt": "2026-11-06T00:35:15.183594+00:00",
+  "total": 1,
   "liveCount": 0,
-  "matches": []
+  "matches": [
+    {
+      "id": "401874815",
+      "date": "2026-11-06T19:45Z",
+      "homeTeam": "Venezia",
+      "awayTeam": "Udinese",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "SCHEDULED",
+      "espnStatus": "STATUS_SCHEDULED",
+      "statusDetail": "Fri, November 6th at 2:45 PM EST",
+      "state": "pre",
+      "elapsed": "0'",
+      "period": null,
+      "isLive": false,
+      "isFinished": false,
+      "venue": "Stadio Pier Luigi Penzo"
+    }
+  ]
 }
