@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-06",
-  "updatedAt": "2026-11-06T21:36:42.214003+00:00",
+  "updatedAt": "2026-11-06T21:39:42.927760+00:00",
   "total": 1,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874815",
@@ -13,14 +13,14 @@
       "awayTeam": "Udinese",
       "homeScore": 2,
       "awayScore": 1,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+4'",
-      "state": "in",
-      "elapsed": "90'+4'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+6'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Stadio Pier Luigi Penzo"
     }
   ]
