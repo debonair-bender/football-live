@@ -2,9 +2,9 @@
   "competition": "Serie B",
   "espnId": "ita.2",
   "date": "2026-11-07",
-  "updatedAt": "2026-11-07T18:12:42.999669+00:00",
+  "updatedAt": "2026-11-07T18:36:43.779582+00:00",
   "total": 6,
-  "liveCount": 0,
+  "liveCount": 1,
   "matches": [
     {
       "id": "401899551",
@@ -98,13 +98,13 @@
       "awayTeam": "US Avellino",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "SCHEDULED",
-      "espnStatus": "STATUS_SCHEDULED",
-      "statusDetail": "Sat, November 7th at 1:30 PM EST",
-      "state": "pre",
-      "elapsed": "0'",
-      "period": null,
-      "isLive": false,
+      "status": "FIRST_HALF",
+      "espnStatus": "STATUS_FIRST_HALF",
+      "statusDetail": "2'",
+      "state": "in",
+      "elapsed": "2'",
+      "period": 1,
+      "isLive": true,
       "isFinished": false,
       "venue": "Stadio Ciro Vigorito"
     }
