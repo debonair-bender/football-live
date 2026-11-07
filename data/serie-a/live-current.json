@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-07",
-  "updatedAt": "2026-11-07T21:36:42.649462+00:00",
+  "updatedAt": "2026-11-07T21:39:43.767940+00:00",
   "total": 4,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874791",
@@ -64,14 +64,14 @@
       "awayTeam": "Sassuolo",
       "homeScore": 3,
       "awayScore": 0,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+3'",
-      "state": "in",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
       "elapsed": "90'+3'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Olimpico"
     }
   ]
