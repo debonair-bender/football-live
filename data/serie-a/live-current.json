@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-07",
-  "updatedAt": "2026-11-07T16:09:42.128366+00:00",
+  "updatedAt": "2026-11-07T16:12:45.743760+00:00",
   "total": 4,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874791",
@@ -30,14 +30,14 @@
       "awayTeam": "Lecce",
       "homeScore": 1,
       "awayScore": 1,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+3'",
-      "state": "in",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
       "elapsed": "90'+3'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Stadio Olimpico Grande Torino"
     },
     {
