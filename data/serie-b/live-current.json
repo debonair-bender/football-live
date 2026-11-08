@@ -2,9 +2,9 @@
   "competition": "Serie B",
   "espnId": "ita.2",
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T20:21:41.800437+00:00",
+  "updatedAt": "2026-11-08T20:24:44.249610+00:00",
   "total": 3,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401899550",
@@ -47,14 +47,14 @@
       "awayTeam": "Cremonese",
       "homeScore": 1,
       "awayScore": 4,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+4'",
-      "state": "in",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
       "elapsed": "90'+4'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Romeo Menti di Vicenza"
     }
   ]
