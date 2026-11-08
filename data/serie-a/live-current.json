@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T19:00:42.587294+00:00",
+  "updatedAt": "2026-11-08T19:51:42.354481+00:00",
   "total": 5,
-  "liveCount": 0,
+  "liveCount": 1,
   "matches": [
     {
       "id": "401874810",
@@ -81,13 +81,13 @@
       "awayTeam": "Juventus",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "SCHEDULED",
-      "espnStatus": "STATUS_SCHEDULED",
-      "statusDetail": "Sun, November 8th at 2:45 PM EST",
-      "state": "pre",
-      "elapsed": "0'",
-      "period": null,
-      "isLive": false,
+      "status": "FIRST_HALF",
+      "espnStatus": "STATUS_IN_PROGRESS",
+      "statusDetail": "3'",
+      "state": "in",
+      "elapsed": "3'",
+      "period": 1,
+      "isLive": true,
       "isFinished": false,
       "venue": "Stadio Artemio Franchi"
     }
