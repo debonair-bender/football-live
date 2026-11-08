@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T15:57:43.423608+00:00",
+  "updatedAt": "2026-11-08T16:00:42.365893+00:00",
   "total": 5,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874810",
@@ -47,14 +47,14 @@
       "awayTeam": "AC Milan",
       "homeScore": 1,
       "awayScore": 2,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+7'",
-      "state": "in",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
       "elapsed": "90'+7'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Stadio Luigi Ferraris"
     },
     {
