@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-08",
-  "updatedAt": "2026-11-08T13:21:41.340749+00:00",
+  "updatedAt": "2026-11-08T13:24:42.823793+00:00",
   "total": 5,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874810",
@@ -13,14 +13,14 @@
       "awayTeam": "Lazio",
       "homeScore": 1,
       "awayScore": 1,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+2'",
-      "state": "in",
-      "elapsed": "90'+2'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+4'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Stadio Diego Armando Maradona"
     },
     {
