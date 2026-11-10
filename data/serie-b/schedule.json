@@ -1,61 +1,9 @@
 {
   "competition": "Serie B",
   "espnId": "ita.2",
-  "date": "2026-11-09",
-  "updatedAt": "2026-11-09T00:32:45.142995+00:00",
-  "total": 3,
+  "date": "2026-11-10",
+  "updatedAt": "2026-11-10T00:30:57.239758+00:00",
+  "total": 0,
   "liveCount": 0,
-  "matches": [
-    {
-      "id": "401899550",
-      "date": "2026-11-08T14:00Z",
-      "homeTeam": "Virtus Entella",
-      "awayTeam": "Modena",
-      "homeScore": 0,
-      "awayScore": 2,
-      "status": "FINISHED",
-      "espnStatus": "STATUS_FULL_TIME",
-      "statusDetail": "FT",
-      "state": "post",
-      "elapsed": "90'+5'",
-      "period": 2,
-      "isLive": false,
-      "isFinished": true,
-      "venue": "Comunale Aldo Gastaldi"
-    },
-    {
-      "id": "401899557",
-      "date": "2026-11-08T16:15Z",
-      "homeTeam": "Carrarese",
-      "awayTeam": "Sampdoria",
-      "homeScore": 0,
-      "awayScore": 1,
-      "status": "FINISHED",
-      "espnStatus": "STATUS_FULL_TIME",
-      "statusDetail": "FT",
-      "state": "post",
-      "elapsed": "90'+5'",
-      "period": 2,
-      "isLive": false,
-      "isFinished": true,
-      "venue": "Dei Marmi"
-    },
-    {
-      "id": "401899554",
-      "date": "2026-11-08T18:30Z",
-      "homeTeam": "Vicenza",
-      "awayTeam": "Cremonese",
-      "homeScore": 1,
-      "awayScore": 4,
-      "status": "FINISHED",
-      "espnStatus": "STATUS_FULL_TIME",
-      "statusDetail": "FT",
-      "state": "post",
-      "elapsed": "90'+4'",
-      "period": 2,
-      "isLive": false,
-      "isFinished": true,
-      "venue": "Romeo Menti di Vicenza"
-    }
-  ]
+  "matches": []
 }
