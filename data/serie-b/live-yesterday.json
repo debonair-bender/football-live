@@ -1,9 +1,27 @@
 {
   "competition": "Serie B",
   "espnId": "ita.2",
-  "date": "2026-11-19",
-  "updatedAt": "2026-11-19T23:00:44.699368+00:00",
-  "total": 0,
+  "date": "2026-11-20",
+  "updatedAt": "2026-11-20T23:00:42.647617+00:00",
+  "total": 1,
   "liveCount": 0,
-  "matches": []
+  "matches": [
+    {
+      "id": "401899543",
+      "date": "2026-11-20T19:30Z",
+      "homeTeam": "Hellas Verona",
+      "awayTeam": "Cesena",
+      "homeScore": 0,
+      "awayScore": 2,
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+6'",
+      "period": 2,
+      "isLive": false,
+      "isFinished": true,
+      "venue": "Stadio Marcantonio Bentegodi"
+    }
+  ]
 }
