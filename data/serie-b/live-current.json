@@ -2,9 +2,9 @@
   "competition": "Serie B",
   "espnId": "ita.2",
   "date": "2026-11-20",
-  "updatedAt": "2026-11-20T21:21:43.967051+00:00",
+  "updatedAt": "2026-11-20T21:24:43.459828+00:00",
   "total": 1,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401899543",
@@ -13,14 +13,14 @@
       "awayTeam": "Cesena",
       "homeScore": 0,
       "awayScore": 2,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+4'",
-      "state": "in",
-      "elapsed": "90'+4'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+6'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Stadio Marcantonio Bentegodi"
     }
   ]
