@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-21",
-  "updatedAt": "2026-11-21T18:48:42.968369+00:00",
+  "updatedAt": "2026-11-21T18:51:42.651219+00:00",
   "total": 4,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401874981",
@@ -47,14 +47,14 @@
       "awayTeam": "AS Roma",
       "homeScore": 1,
       "awayScore": 5,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+2'",
-      "state": "in",
-      "elapsed": "90'+2'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+3'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Ennio Tardini"
     },
     {
