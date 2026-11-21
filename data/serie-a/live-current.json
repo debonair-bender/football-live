@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-21",
-  "updatedAt": "2026-11-21T18:51:42.651219+00:00",
+  "updatedAt": "2026-11-21T19:48:42.934636+00:00",
   "total": 4,
-  "liveCount": 0,
+  "liveCount": 1,
   "matches": [
     {
       "id": "401874981",
@@ -64,13 +64,13 @@
       "awayTeam": "Torino",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "SCHEDULED",
-      "espnStatus": "STATUS_SCHEDULED",
-      "statusDetail": "Sat, November 21st at 2:45 PM EST",
-      "state": "pre",
-      "elapsed": "0'",
-      "period": null,
-      "isLive": false,
+      "status": "FIRST_HALF",
+      "espnStatus": "STATUS_FIRST_HALF",
+      "statusDetail": "3'",
+      "state": "in",
+      "elapsed": "3'",
+      "period": 1,
+      "isLive": true,
       "isFinished": false,
       "venue": "Stadio Diego Armando Maradona"
     }
