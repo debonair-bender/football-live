@@ -2,9 +2,9 @@
   "competition": "Serie B",
   "espnId": "ita.2",
   "date": "2026-11-22",
-  "updatedAt": "2026-11-22T15:54:42.718701+00:00",
+  "updatedAt": "2026-11-22T16:18:43.724209+00:00",
   "total": 2,
-  "liveCount": 0,
+  "liveCount": 1,
   "matches": [
     {
       "id": "401899547",
@@ -30,13 +30,13 @@
       "awayTeam": "Padova",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "SCHEDULED",
-      "espnStatus": "STATUS_SCHEDULED",
-      "statusDetail": "Sun, November 22nd at 11:15 AM EST",
-      "state": "pre",
-      "elapsed": "0'",
-      "period": null,
-      "isLive": false,
+      "status": "FIRST_HALF",
+      "espnStatus": "STATUS_FIRST_HALF",
+      "statusDetail": "2'",
+      "state": "in",
+      "elapsed": "2'",
+      "period": 1,
+      "isLive": true,
       "isFinished": false,
       "venue": "Stadio Città di Arezzo"
     }
