@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-22",
-  "updatedAt": "2026-11-22T13:18:46.672725+00:00",
+  "updatedAt": "2026-11-22T13:21:42.209942+00:00",
   "total": 5,
-  "liveCount": 1,
+  "liveCount": 0,
   "matches": [
     {
       "id": "401875008",
@@ -13,14 +13,14 @@
       "awayTeam": "Venezia",
       "homeScore": 4,
       "awayScore": 0,
-      "status": "SECOND_HALF",
-      "espnStatus": "STATUS_SECOND_HALF",
-      "statusDetail": "90'+1'",
-      "state": "in",
-      "elapsed": "90'+1'",
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+4'",
       "period": 2,
-      "isLive": true,
-      "isFinished": false,
+      "isLive": false,
+      "isFinished": true,
       "venue": "Allianz Stadium"
     },
     {
