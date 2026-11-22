@@ -2,9 +2,9 @@
   "competition": "Serie A",
   "espnId": "ita.1",
   "date": "2026-11-22",
-  "updatedAt": "2026-11-22T18:54:43.608796+00:00",
+  "updatedAt": "2026-11-22T19:48:42.137013+00:00",
   "total": 5,
-  "liveCount": 0,
+  "liveCount": 1,
   "matches": [
     {
       "id": "401875008",
@@ -81,13 +81,13 @@
       "awayTeam": "Internazionale",
       "homeScore": 0,
       "awayScore": 0,
-      "status": "SCHEDULED",
-      "espnStatus": "STATUS_SCHEDULED",
-      "statusDetail": "Sun, November 22nd at 2:45 PM EST",
-      "state": "pre",
-      "elapsed": "0'",
-      "period": null,
-      "isLive": false,
+      "status": "FIRST_HALF",
+      "espnStatus": "STATUS_FIRST_HALF",
+      "statusDetail": "4'",
+      "state": "in",
+      "elapsed": "4'",
+      "period": 1,
+      "isLive": true,
       "isFinished": false,
       "venue": "New Balance Arena"
     }
