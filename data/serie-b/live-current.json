@@ -2,8 +2,43 @@
   "competition": "Serie B",
   "espnId": "ita.2",
   "date": "2026-11-22",
-  "updatedAt": "2026-11-21T23:00:42.169410+00:00",
-  "total": 0,
+  "updatedAt": "2026-11-22T00:33:41.574747+00:00",
+  "total": 2,
   "liveCount": 0,
-  "matches": []
+  "matches": [
+    {
+      "id": "401899547",
+      "date": "2026-11-22T14:00Z",
+      "homeTeam": "US Avellino",
+      "awayTeam": "Mantova",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "SCHEDULED",
+      "espnStatus": "STATUS_SCHEDULED",
+      "statusDetail": "Sun, November 22nd at 9:00 AM EST",
+      "state": "pre",
+      "elapsed": "0'",
+      "period": null,
+      "isLive": false,
+      "isFinished": false,
+      "venue": "Partenio"
+    },
+    {
+      "id": "401899549",
+      "date": "2026-11-22T16:15Z",
+      "homeTeam": "Arezzo",
+      "awayTeam": "Padova",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "SCHEDULED",
+      "espnStatus": "STATUS_SCHEDULED",
+      "statusDetail": "Sun, November 22nd at 11:15 AM EST",
+      "state": "pre",
+      "elapsed": "0'",
+      "period": null,
+      "isLive": false,
+      "isFinished": false,
+      "venue": "Stadio Città di Arezzo"
+    }
+  ]
 }
