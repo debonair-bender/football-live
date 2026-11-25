@@ -1,27 +1,9 @@
 {
   "competition": "Serie A",
   "espnId": "ita.1",
-  "date": "2026-11-24",
-  "updatedAt": "2026-11-24T00:42:39.987471+00:00",
-  "total": 1,
+  "date": "2026-11-25",
+  "updatedAt": "2026-11-25T00:46:14.791807+00:00",
+  "total": 0,
   "liveCount": 0,
-  "matches": [
-    {
-      "id": "401875009",
-      "date": "2026-11-23T19:45Z",
-      "homeTeam": "Monza",
-      "awayTeam": "Fiorentina",
-      "homeScore": 3,
-      "awayScore": 0,
-      "status": "FINISHED",
-      "espnStatus": "STATUS_FULL_TIME",
-      "statusDetail": "FT",
-      "state": "post",
-      "elapsed": "90'+3'",
-      "period": 2,
-      "isLive": false,
-      "isFinished": true,
-      "venue": "U-Power Stadium"
-    }
-  ]
+  "matches": []
 }
