@@ -1,9 +1,9 @@
 {
   "competition": "Serie A",
   "espnId": "ita.1",
-  "date": "2026-11-27",
-  "updatedAt": "2026-11-27T01:19:27.481575+00:00",
-  "total": 1,
+  "date": "2026-11-28",
+  "updatedAt": "2026-11-28T00:52:57.795725+00:00",
+  "total": 4,
   "liveCount": 0,
   "matches": [
     {
@@ -13,15 +13,66 @@
       "awayTeam": "Bologna",
       "homeScore": 0,
       "awayScore": 0,
+      "status": "FINISHED",
+      "espnStatus": "STATUS_FULL_TIME",
+      "statusDetail": "FT",
+      "state": "post",
+      "elapsed": "90'+3'",
+      "period": 2,
+      "isLive": false,
+      "isFinished": true,
+      "venue": "Stadio Pier Luigi Penzo"
+    },
+    {
+      "id": "401875081",
+      "date": "2026-11-28T14:00Z",
+      "homeTeam": "Frosinone",
+      "awayTeam": "Parma",
+      "homeScore": 0,
+      "awayScore": 0,
       "status": "SCHEDULED",
       "espnStatus": "STATUS_SCHEDULED",
-      "statusDetail": "Fri, November 27th at 2:45 PM EST",
+      "statusDetail": "Sat, November 28th at 9:00 AM EST",
       "state": "pre",
       "elapsed": "0'",
       "period": null,
       "isLive": false,
       "isFinished": false,
-      "venue": "Stadio Pier Luigi Penzo"
+      "venue": "Stadio Benito Stirpe"
+    },
+    {
+      "id": "401874826",
+      "date": "2026-11-28T17:00Z",
+      "homeTeam": "Torino",
+      "awayTeam": "Lazio",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "SCHEDULED",
+      "espnStatus": "STATUS_SCHEDULED",
+      "statusDetail": "Sat, November 28th at 12:00 PM EST",
+      "state": "pre",
+      "elapsed": "0'",
+      "period": null,
+      "isLive": false,
+      "isFinished": false,
+      "venue": "Stadio Olimpico Grande Torino"
+    },
+    {
+      "id": "401874977",
+      "date": "2026-11-28T19:45Z",
+      "homeTeam": "Internazionale",
+      "awayTeam": "Genoa",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "SCHEDULED",
+      "espnStatus": "STATUS_SCHEDULED",
+      "statusDetail": "Sat, November 28th at 2:45 PM EST",
+      "state": "pre",
+      "elapsed": "0'",
+      "period": null,
+      "isLive": false,
+      "isFinished": false,
+      "venue": "San Siro"
     }
   ]
 }
